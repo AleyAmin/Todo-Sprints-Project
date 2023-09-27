@@ -1,0 +1,27 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 row">
+      <div class="col-4 g-5" *ngFor="let user of users">
+        <div class="card p-2 m-3 text-center">
+          <div>
+            <img src={{user.avatar}} class="card-img-top" alt="user-avatar" style="height: 150px; width: 150px;">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{user.username}}</h5>
+            <button (click)="signIn(user.username)" type="button" class="btn btn-primary" data-bs-toggle="modal"
+              data-bs-target="#userPassword">Choose</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section class="d-flex justify-content-center align-items-center w-100 text-center" style="height: 30vh;">
+    <div>
+      <input type="text" readonly class="form-control" placeholder="Choose your username" value="{{currentUsername}}"
+        aria-label="username" aria-describedby="username" required>
+      <input type="password" class="form-control my-3" placeholder="Enter your Password" aria-label="Password"
+        aria-describedby="password" #user_password required>
+      <button type="button" class="btn btn-primary" (click)="sendPasswordAndLogIn(user_password.value)">Sign In</button>
+    </div>
+  </section>
+</div>
