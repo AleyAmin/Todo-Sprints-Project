@@ -1,13 +1,13 @@
 <nav class="navbar bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/">Todos App</a>
-    <div class="d-flex justify-content-between" style="width: 15vw;">
+    <a class="navbar-brand" [routerLink]="['/todos']"><fa-icon [icon]="faHouse"></fa-icon> Todos App</a>
+    <div class="d-flex justify-content-between" style="width: 20vw;">
       <div class="d-flex align-items-center">
         <img src="{{avatar}}" class="card-img-top" alt="user-avatar" style="height: 30px; width: 35px;">
         <h5 style="margin: 0;">{{Name}}</h5>
       </div>
-      <button type="button" class="btn btn-danger" (click)="logOut()">
-        LogOut
+      <button type="button" class="btn btn-danger" (click)="logOut()" (keydown.enter)="logOut()">
+        <fa-icon [icon]="faLogout"></fa-icon> LogOut
       </button>
     </div>
   </div>
@@ -18,7 +18,7 @@
       <input class="m-3" type="text" placeholder="Enter your task" #taskAdd>
       <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#userPassword"
         (click)="AddTask(taskAdd.value)">
-        Add Task
+        <fa-icon [icon]="faPlus"></fa-icon> Add Task
       </button>
     </div>
   </form>
@@ -36,10 +36,11 @@
               <h5 class="card-title">{{todo.task}}</h5>
             </div>
             <div>
-              <input class="mx-5" type="checkbox" (click)="ToggleTask(todo.id)" [checked]="todo.completed != false">
+              <label for="completed">Completed</label>
+              <input name="completed" class="ms-2 me-5" type="checkbox" (click)="ToggleTask(todo.id)" [checked]="todo.completed != false">
               <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#userPassword"
-                (click)="DeleteTask(todo.id)">
-                Delete
+                (click)="DeleteTask(todo.id)" (keydown.enter)="DeleteTask(todo.id)  ">
+                <fa-icon [icon]="faTrash"></fa-icon> Delete
               </button>
             </div>
           </div>

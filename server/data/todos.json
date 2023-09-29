@@ -1,1 +1,1 @@
-[{"id":2,"user_id":1,"task":"Buy eggs","completed":false},{"id":3,"task":"Buy silk","user_id":2,"completed":true},{"id":4,"task":"Pay the rent","user_id":3,"completed":false},{"task":"Buy milk","id":6,"user_id":1,"completed":false}]
+[{"id":2,"user_id":1,"task":"Buy eggs","completed":false},{"id":4,"task":"Pay the rent","user_id":3,"completed":false},{"task":"Buy milk","id":6,"user_id":1,"completed":false},{"task":"Buy Silk","id":8,"user_id":2,"completed":false}]

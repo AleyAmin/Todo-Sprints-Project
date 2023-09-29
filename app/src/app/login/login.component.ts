@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { faHandPointer, faKey, faRightFromBracket, faUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,10 @@ export class LoginComponent implements OnInit {
   currentUsername: any = null;
   userAutherization: any = null;
   LoginForm!: FormGroup;
-
+  faPass = faKey;
+  faUser = faUser;
+  faLogin = faRightFromBracket;
+  faChoose = faHandPointer;
   constructor(private router: Router, private http: HttpClient) { }
 
   ngOnInit(): void {

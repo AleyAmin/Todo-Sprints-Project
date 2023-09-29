@@ -4,31 +4,40 @@
       <div class="col-4 g-5" *ngFor="let user of users">
         <div class="card p-2 m-3 text-center">
           <div>
-            <img src={{user.avatar}} class="card-img-top" alt="user-avatar" style="height: 150px; width: 150px;">
+            <img src={{user.avatar}} class="card-img-top" alt="user-avatar" style="height: 130px; width: 150px;">
           </div>
           <div class="card-body">
             <h5 class="card-title">{{user.username}}</h5>
             <button (click)="signIn(user.username)" type="button" class="btn btn-primary" data-bs-toggle="modal"
-              data-bs-target="#userPassword">Choose</button>
+              data-bs-target="#userPassword"><fa-icon [icon]="faChoose"></fa-icon> Choose</button>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <section class="d-flex justify-content-center align-items-center w-100 text-center" style="height: 30vh;">
+  <section class="d-flex justify-content-center w-100 text-center mt-4">
     <form class="d-grid" [formGroup]="LoginForm">
-      <input type="text" readonly formControlName="Username" placeholder="Choose your username"
-        value="{{currentUsername}}" aria-label="username" aria-describedby="username">
+      <div class="input-group mb-3">
+        <span class="input-group-text"><fa-icon [icon]="faUser"></fa-icon></span>
+        <input type="text" readonly formControlName="Username" placeholder="Choose your username"
+          value="{{currentUsername}}" aria-label="username" aria-describedby="username">
+      </div>
       <span class="text-danger" *ngIf="!currentUsername && LoginForm.get('Password')?.touched">Choose
         User</span>
-      <input type="password" formControlName="Password" class="my-3" placeholder="Enter your Password"
-        aria-label="Password" aria-describedby="password" #user_password>
+      <div class="input-group mb-3">
+        <span class="input-group-text"><fa-icon [icon]="faPass"></fa-icon></span>
+        <input type="password" formControlName="Password" placeholder="Enter your Password"
+          aria-label="Password" aria-describedby="password" #user_password>
+      </div>
       <span class="text-danger"
         *ngIf="LoginForm.get('Password')?.getError('required') && LoginForm.get('Password')?.touched">Password
         required</span>
-      <button [disabled]="LoginForm.invalid || !currentUsername" type="button" class="btn btn-primary"
-        (click)="sendPasswordAndLogIn(user_password.value)">Sign
-        In</button>
-    </form>
-  </section>
+      </form>
+    </section>
+    <div class="d-flex justify-content-center">
+      <button [disabled]="LoginForm.invalid || !currentUsername" type="button" class="btn btn-primary d-flex"
+        (click)="sendPasswordAndLogIn(user_password.value)"
+        (keydown.enter)="sendPasswordAndLogIn(user_password.value)"><fa-icon class="me-2" [icon]="faLogin"></fa-icon> Sign In
+      </button>
+    </div>
 </div>
