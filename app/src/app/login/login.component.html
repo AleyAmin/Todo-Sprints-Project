@@ -16,12 +16,19 @@
     </div>
   </div>
   <section class="d-flex justify-content-center align-items-center w-100 text-center" style="height: 30vh;">
-    <div>
-      <input type="text" readonly class="form-control" placeholder="Choose your username" value="{{currentUsername}}"
-        aria-label="username" aria-describedby="username" required>
-      <input type="password" class="form-control my-3" placeholder="Enter your Password" aria-label="Password"
-        aria-describedby="password" #user_password required>
-      <button type="button" class="btn btn-primary" (click)="sendPasswordAndLogIn(user_password.value)">Sign In</button>
-    </div>
+    <form class="d-grid" [formGroup]="LoginForm">
+      <input type="text" readonly formControlName="Username" placeholder="Choose your username"
+        value="{{currentUsername}}" aria-label="username" aria-describedby="username">
+      <span class="text-danger" *ngIf="!currentUsername && LoginForm.get('Password')?.touched">Choose
+        User</span>
+      <input type="password" formControlName="Password" class="my-3" placeholder="Enter your Password"
+        aria-label="Password" aria-describedby="password" #user_password>
+      <span class="text-danger"
+        *ngIf="LoginForm.get('Password')?.getError('required') && LoginForm.get('Password')?.touched">Password
+        required</span>
+      <button [disabled]="LoginForm.invalid || !currentUsername" type="button" class="btn btn-primary"
+        (click)="sendPasswordAndLogIn(user_password.value)">Sign
+        In</button>
+    </form>
   </section>
 </div>

@@ -36,8 +36,7 @@
               <h5 class="card-title">{{todo.task}}</h5>
             </div>
             <div>
-              <input *ngIf="todo.completed == false" class="mx-5" type="checkbox" (click)="ToggleTask(todo.id)">
-              <input *ngIf="todo.completed != false" class="mx-5" type="checkbox" (click)="ToggleTask(todo.id)" checked>
+              <input class="mx-5" type="checkbox" (click)="ToggleTask(todo.id)" [checked]="todo.completed != false">
               <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#userPassword"
                 (click)="DeleteTask(todo.id)">
                 Delete

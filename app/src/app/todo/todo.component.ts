@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-todo',
   templateUrl: './todo.component.html',
@@ -10,17 +10,28 @@ export class TodoComponent implements OnInit {
   userTodos: any;
   avatar!: string;
   Name!: string;
+  users: any;
 
-  constructor(private http: HttpClient) { }
+  constructor(private router: Router ,private http: HttpClient) { }
 
   ngOnInit(): void {
+    this.fetchData();
     this.fetchTodos();
   }
 
   logOut(): void {
     localStorage.removeItem('userAutherization');
-    window.location.href = "/"
+    this.router.navigate(['login']);
 
+  }
+
+  fetchData(): void {
+    this.http.get('http://localhost:4000/users')
+      .subscribe(response => {
+        this.users = response;
+      }, error => {
+        console.error('Error fetching data:', error);
+      });
   }
   
   fetchTodos(): void {
@@ -34,25 +45,19 @@ export class TodoComponent implements OnInit {
         .subscribe((response: any) => {
           this.userTodos = response;
           for ( let todo of this.userTodos){
-            if(todo.user_id == 1){
-              this.avatar = "https://robohash.org/zucker-ping.png";
-              this.Name = "Zucker Ping";
-            }
-            if(todo.user_id == 2){
-              this.avatar = "https://robohash.org/felon-must.png";
-              this.Name = "Felon Must";
-            }
-            if(todo.user_id == 3){
-              this.avatar = "https://robohash.org/robon-wood.png";
-              this.Name = "Robon Wood";
+            for (let user of this.users){
+              if(todo.user_id == user.id){
+                this.avatar = user.avatar;
+                this.Name = user.name;
+              }
             }
           }
         }, error => {
           console.error('Error fetching data:', error);
-          window.location.href = "/"
+          this.router.navigate(['login']);
         });
     } else {
-      window.location.href = "/"
+      this.router.navigate(['login']);
     }
 
   }
